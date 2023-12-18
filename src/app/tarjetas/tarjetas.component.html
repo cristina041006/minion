@@ -1,0 +1,51 @@
+<h1>Minioland</h1>
+
+<ul class="lista" *ngIf="minion==undefined && !bandera;else busqueda">
+    <li *ngFor="let minion of minions; let i = index">
+        <div class="card" style="width: 18rem;">
+            <img src={{minion.img}} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><img src="../../assets/img/favicon.ico" class="ima" alt="...">{{minion.name}}</h5>
+              <p class="card-text">{{minion.bio}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Año de nacimiento {{minion.birth}}</li>
+              <li class="list-group-item" *ngIf="minion.side==='de los buenos';else malo">Lado {{minion.side}} <img src="../../assets/img/de los buenos.PNG" class="ima" alt="..."></li>
+              <ng-template #malo><li class="list-group-item">Lado {{minion.side}} <img src="../../assets/img/de los malos.PNG" class="ima" alt="..."></li></ng-template>
+              <li class="list-group-item" *ngIf="favorite.includes(i);else noFavorite"><img src="../../assets/img/redHeart.png" class="ima" alt="..." (click)="nolike(i)"></li>
+              <ng-template #noFavorite><li class="list-group-item"><img src="../../assets/img/heart.png" class="ima" alt="..." (click)="like(i)"></li></ng-template>
+            </ul>
+          </div>
+          <br>
+    </li>
+</ul>
+
+<ng-template #busqueda>
+  <ul class="lista" *ngIf="minion!=undefined; else noMinion">
+    <li *ngFor="let minion of minion; let i = index">
+        <div clas="card" style="width: 18rem;">
+            <img src={{minion.img}} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><img src="../../assets/img/favicon.ico" class="ima" alt="...">{{minion.name}}</h5>
+              <p class="card-text">{{minion.bio}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Año de nacimiento {{minion.birth}}</li>
+              <li class="list-group-item" *ngIf="minion.side==='de los buenos';else malo">Lado {{minion.side}} <img src="../../assets/img/de los buenos.PNG" class="ima" alt="..."></li>
+              <ng-template #malo><li class="list-group-item">Lado {{minion.side}} <img src="../../assets/img/de los malos.PNG" class="ima" alt="..."></li></ng-template>
+              <li class="list-group-item" *ngIf="favorite.includes(i);else noFavorite"><img src="../../assets/img/redHeart.png" class="ima" alt="..." (click)="nolike(i)"></li>
+              <ng-template #noFavorite><li class="list-group-item"><img src="../../assets/img/heart.png" class="ima" alt="..." (click)="like(i)"></li></ng-template>
+            </ul>
+          </div>
+          <br>
+    </li>
+</ul>
+</ng-template>
+
+<ng-template #noMinion>
+  <ul class="lista">
+    <li>
+        No existe ese minion
+    </li>
+</ul>
+</ng-template>
